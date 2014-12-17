@@ -102,7 +102,7 @@ public class MainFragment extends BrowseFragment implements
     }
 
     private void setupUIElements() {
-        setBadgeDrawable(getActivity().getResources().getDrawable(R.drawable.videos_by_google_banner));
+        setBadgeDrawable(getActivity().getResources().getDrawable(R.drawable.ic_launcher));
         setTitle(getString(R.string.browse_title)); // Badge, when set, takes precedent over title
         setHeadersState(HEADERS_ENABLED);
         setHeadersTransitionOnBackEnabled(true);
@@ -169,15 +169,15 @@ public class MainFragment extends BrowseFragment implements
             mRowsAdapter.add(new ListRow(header, listRowAdapter));
         }
 
-        HeaderItem gridHeader = new HeaderItem(i, getString(R.string.more_samples),
-                null);
+//        HeaderItem gridHeader = new HeaderItem(i, getString(R.string.more_samples),
+//                null);
 
-        GridItemPresenter gridPresenter = new GridItemPresenter();
-        ArrayObjectAdapter gridRowAdapter = new ArrayObjectAdapter(gridPresenter);
-        gridRowAdapter.add(getString(R.string.grid_view));
-        gridRowAdapter.add(getString(R.string.error_fragment));
-        gridRowAdapter.add(getString(R.string.personal_settings));
-        mRowsAdapter.add(new ListRow(gridHeader, gridRowAdapter));
+//        GridItemPresenter gridPresenter = new GridItemPresenter();
+//        ArrayObjectAdapter gridRowAdapter = new ArrayObjectAdapter(gridPresenter);
+//        gridRowAdapter.add(getString(R.string.grid_view));
+//        gridRowAdapter.add(getString(R.string.error_fragment));
+//        gridRowAdapter.add(getString(R.string.personal_settings));
+//        mRowsAdapter.add(new ListRow(gridHeader, gridRowAdapter));
 
         setAdapter(mRowsAdapter);
 

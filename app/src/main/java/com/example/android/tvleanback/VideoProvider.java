@@ -31,6 +31,7 @@ import java.io.InputStreamReader;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /*
@@ -40,7 +41,7 @@ public class VideoProvider {
 
     private static final String TAG = "VideoProvider";
     private static String TAG_MEDIA = "videos";
-    private static String TAG_GOOGLE_VIDEOS = "googlevideos";
+    private static String TAG_GOOGLE_VIDEOS = "ddvideos";
     private static String TAG_CATEGORY = "category";
     private static String TAG_STUDIO = "studio";
     private static String TAG_SOURCES = "sources";
@@ -49,7 +50,7 @@ public class VideoProvider {
     private static String TAG_BACKGROUND = "background";
     private static String TAG_TITLE = "title";
 
-    private static HashMap<String, List<Movie>> sMovieList;
+    private static LinkedHashMap<String, List<Movie>> sMovieList;
     private static Context sContext;
     private static String sPrefixUrl;
 
@@ -67,7 +68,7 @@ public class VideoProvider {
         if (null != sMovieList) {
             return sMovieList;
         }
-        sMovieList = new HashMap<String, List<Movie>>();
+        sMovieList = new LinkedHashMap<>();
 
         JSONObject jsonObj = new VideoProvider().parseUrl(url);
         JSONArray categories = jsonObj.getJSONArray(TAG_GOOGLE_VIDEOS);

@@ -16,8 +16,8 @@
 -->
 
 <resources>
-    <string name="app_name"><![CDATA[Videos by Google]]></string>
-    <string name="browse_title"><![CDATA[Videos by Google]]></string>
+    <string name="app_name"><![CDATA[DD TV]]></string>
+    <string name="browse_title"><![CDATA[DD Videos]]></string>
     <string name="related_movies">Related Movies</string>
     <string name="vertical_grid_title"><![CDATA[Vertical Video Grid]]></string>
     <string name="error">Error</string>
@@ -45,7 +45,8 @@
     <string name="should_start">shouldStart</string>
     <string name="start_position">startPosition</string>
     <string name="search_results">Search Results</string>
-    <string name="catalog_url">http://commondatastorage.googleapis.com/android-tv/android_tv_videos.json</string>
+    <!--<string name="catalog_url">http://commondatastorage.googleapis.com/android-tv/android_tv_videos.json</string>-->
+    <string name="catalog_url">http://www.json-generator.com/api/json/get/cqesgOuopu?indent=2</string>
     <string name="prefix_url">http://commondatastorage.googleapis.com/android-tv/Sample%20videos/</string>
 
     <!-- Error messages -->
