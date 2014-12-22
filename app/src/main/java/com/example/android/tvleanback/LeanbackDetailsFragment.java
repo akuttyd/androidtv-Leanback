@@ -190,7 +190,7 @@ public class LeanbackDetailsFragment extends DetailsFragment {
             }
             ClassPresenterSelector presenterSelector = new ClassPresenterSelector();
             // set detail background and style
-            mDorPresenter.setBackgroundColor(getResources().getColor(R.color.detail_background));
+            mDorPresenter.setBackgroundColor(getResources().getColor(R.color.fastlane_background));
             mDorPresenter.setStyleLarge(true);
             mDorPresenter.setOnActionClickedListener(new OnActionClickedListener() {
                 @Override

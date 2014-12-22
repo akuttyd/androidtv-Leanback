@@ -102,7 +102,7 @@ public class MainFragment extends BrowseFragment implements
     }
 
     private void setupUIElements() {
-        setBadgeDrawable(getActivity().getResources().getDrawable(R.drawable.ic_launcher));
+//        setBadgeDrawable(getActivity().getResources().getDrawable(R.drawable.ic_launcher));
         setTitle(getString(R.string.browse_title)); // Badge, when set, takes precedent over title
         setHeadersState(HEADERS_ENABLED);
         setHeadersTransitionOnBackEnabled(true);
