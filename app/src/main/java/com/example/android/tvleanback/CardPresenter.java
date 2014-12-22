@@ -37,8 +37,8 @@ public class CardPresenter extends Presenter {
     private static final String TAG = "CardPresenter";
 
     private static Context mContext;
-    private static int CARD_WIDTH = 313;
-    private static int CARD_HEIGHT = 176;
+    private static int CARD_WIDTH = 200;
+    private static int CARD_HEIGHT = 300;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent) {

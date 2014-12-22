@@ -61,7 +61,7 @@ public class MainFragment extends BrowseFragment implements
 
     private static int BACKGROUND_UPDATE_DELAY = 300;
     private static int GRID_ITEM_WIDTH = 200;
-    private static int GRID_ITEM_HEIGHT = 200;
+    private static int GRID_ITEM_HEIGHT = 400;
     private static String mVideosUrl;
     private final Handler mHandler = new Handler();
     private ArrayObjectAdapter mRowsAdapter;
@@ -171,7 +171,7 @@ public class MainFragment extends BrowseFragment implements
 
 //        HeaderItem gridHeader = new HeaderItem(i, getString(R.string.more_samples),
 //                null);
-
+//
 //        GridItemPresenter gridPresenter = new GridItemPresenter();
 //        ArrayObjectAdapter gridRowAdapter = new ArrayObjectAdapter(gridPresenter);
 //        gridRowAdapter.add(getString(R.string.grid_view));

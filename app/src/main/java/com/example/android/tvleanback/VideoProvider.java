@@ -53,6 +53,8 @@ public class VideoProvider {
     private static LinkedHashMap<String, List<Movie>> sMovieList;
     private static Context sContext;
     private static String sPrefixUrl;
+    private static String sPrefixCardUrl;
+    private static String sPrefixCardAPIKey;
 
     public static void setContext(Context context) {
         if (sContext == null)
@@ -79,6 +81,9 @@ public class VideoProvider {
             String bgImageUrl = new String();
             String cardImageUrl = new String();
             String studio = new String();
+            sPrefixUrl = sContext.getResources().getString(R.string.prefix_url);
+            sPrefixCardAPIKey = sContext.getResources().getString(R.string.prefix_card_apikey);
+
             for (int i = 0; i < categories.length(); i++) {
                 JSONObject category = categories.getJSONObject(i);
                 String category_name = category.getString(TAG_CATEGORY);
@@ -97,10 +102,8 @@ public class VideoProvider {
                         }
                         title = video.getString(TAG_TITLE);
                         videoUrl = getVideoPrefix(category_name, videoUrls.getString(0));
-                        bgImageUrl = getThumbPrefix(category_name, title,
-                                video.getString(TAG_BACKGROUND));
-                        cardImageUrl = getThumbPrefix(category_name, title,
-                                video.getString(TAG_CARD_THUMB));
+                        bgImageUrl = getThumbPrefix(video.getString(TAG_BACKGROUND));
+                        cardImageUrl = getThumbPrefix(video.getString(TAG_CARD_THUMB));
                         studio = video.getString(TAG_STUDIO);
                         categoryList.add(buildMovieInfo(category_name, title, description, studio,
                                 videoUrl, cardImageUrl,
@@ -141,20 +144,15 @@ public class VideoProvider {
         return ret;
     }
 
-    private static String getThumbPrefix(String category, String title, String imageUrl) {
+    private static String getThumbPrefix(String imageUrl) {
         String ret = "";
-
-        ret = sPrefixUrl + category.replace(" ", "%20") + '/' +
-                title.replace(" ", "%20") + '/' +
-                imageUrl.replace(" ", "%20");
+        ret = imageUrl.replace(" ", "%20") + sPrefixCardAPIKey;
         return ret;
     }
 
     protected JSONObject parseUrl(String urlString) {
         Log.d(TAG, "Parse URL: " + urlString);
         InputStream is = null;
-
-        sPrefixUrl = sContext.getResources().getString(R.string.prefix_url);
 
         try {
             java.net.URL url = new java.net.URL(urlString);

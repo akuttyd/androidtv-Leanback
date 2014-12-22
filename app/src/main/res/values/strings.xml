@@ -46,9 +46,9 @@
     <string name="start_position">startPosition</string>
     <string name="search_results">Search Results</string>
     <!--<string name="catalog_url">http://commondatastorage.googleapis.com/android-tv/android_tv_videos.json</string>-->
-    <string name="catalog_url">http://www.json-generator.com/api/json/get/cqesgOuopu?indent=2</string>
+    <string name="catalog_url">http://www.json-generator.com/api/json/get/cnngqKkgOa?indent=2</string>
     <string name="prefix_url">http://commondatastorage.googleapis.com/android-tv/Sample%20videos/</string>
-
+    <string name="prefix_card_apikey">&amp;apikey=de579dd7</string>
     <!-- Error messages -->
     <string name="failed_to_launch_app">Failed to launch application</string>
     <string name="failed_to_find_app">The application you are trying to launch is not available</string>
