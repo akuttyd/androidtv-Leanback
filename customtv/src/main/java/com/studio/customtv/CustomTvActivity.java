@@ -8,13 +8,20 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v17.leanback.widget.HorizontalGridView;
+import android.support.v17.leanback.widget.ImageCardView;
+import android.support.v17.leanback.widget.OnItemViewClickedListener;
+import android.support.v17.leanback.widget.Presenter;
+import android.support.v17.leanback.widget.Row;
+import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v17.leanback.widget.SearchOrbView;
 import android.support.v17.leanback.widget.TitleView;
 import android.support.v17.leanback.widget.VerticalGridView;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.Toast;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -26,7 +33,7 @@ import java.util.LinkedHashMap;
 public class CustomTvActivity extends Activity {
 
     private SearchOrbView orbView;
-    private TitleView mTitleView;
+    public TitleView mTitleView;
 
     private CustomHeadersFragment headersFragment;
     private CustomRowsFragment rowsFragment;
@@ -59,13 +66,14 @@ public class CustomTvActivity extends Activity {
 
         fragmentLinkedHashMap = new LinkedHashMap<Integer, CustomRowsFragment>();
 
-        for (int i = 0; i < MovieList.HEADER_CATEGORY.length; i++) {
+        for (int i = 0; i < DummyDataList.HEADER_CATEGORY.length; i++) {
             CustomRowsFragment fragment = CustomRowsFragment.newInstance(i);
             fragmentLinkedHashMap.put(i, fragment);
         }
 
         headersFragment = new CustomHeadersFragment();
         rowsFragment = fragmentLinkedHashMap.get(0);
+        rowsFragment.setOnItemViewClickedListener(new ItemViewClickedListener());
 
         customFrameLayout = (CustomFrameLayout) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
         setupCustomFrameLayout();
@@ -172,6 +180,7 @@ public class CustomTvActivity extends Activity {
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
+                    rowsFragment.showCategoryTitle(!doOpen);
                     if (!doOpen) {
                         rowsFragment.refresh();
                     }
@@ -184,6 +193,7 @@ public class CustomTvActivity extends Activity {
 
             animation.setDuration(200);
             ((View) rowsContainer.getParent()).startAnimation(animation);
+
         }
     }
 
@@ -221,6 +231,34 @@ public class CustomTvActivity extends Activity {
         }
 
         return null;
+    }
+
+    private final class ItemViewClickedListener implements OnItemViewClickedListener {
+        @Override
+        public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
+                                  RowPresenter.ViewHolder rowViewHolder, Row row) {
+
+            if (item instanceof Movie) {
+                Movie movie = (Movie) item;
+                //Log.d(TAG, "Item: " + item.toString());
+                Intent intent = new Intent(CustomTvActivity.this, DetailsActivity.class);
+                intent.putExtra(DetailsActivity.MOVIE, movie);
+
+                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        CustomTvActivity.this,
+                        ((ImageCardView) itemViewHolder.view).getMainImageView(),
+                        DetailsActivity.SHARED_ELEMENT_NAME).toBundle();
+                CustomTvActivity.this.startActivity(intent, bundle);
+            } else if (item instanceof String) {
+                if (((String) item).indexOf(getString(R.string.error_fragment)) >= 0) {
+                    Intent intent = new Intent(CustomTvActivity.this, BrowseErrorActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(CustomTvActivity.this, ((String) item), Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+        }
     }
 
     public synchronized boolean isNavigationDrawerOpen() {

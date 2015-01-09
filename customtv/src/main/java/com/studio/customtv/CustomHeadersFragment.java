@@ -36,7 +36,7 @@ public class CustomHeadersFragment extends HeadersFragment {
 
 		int id = 0;
 		for (int i = 0; i < fragmentLinkedHashMap.size(); i++) {
-			HeaderItem header = new HeaderItem(id, MovieList.HEADER_CATEGORY[i], null);
+			HeaderItem header = new HeaderItem(id, DummyDataList.HEADER_CATEGORY[i], null);
 			ArrayObjectAdapter innerAdapter = new ArrayObjectAdapter();
 			innerAdapter.add(fragmentLinkedHashMap.get(i));
 			adapter.add(id, new ListRow(header, innerAdapter));

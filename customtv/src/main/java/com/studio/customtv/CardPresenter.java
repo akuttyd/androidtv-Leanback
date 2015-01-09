@@ -19,7 +19,7 @@ public class CardPresenter extends Presenter {
     private static final String TAG = "CardPresenter";
 
     private static Context mContext;
-    private static int CARD_WIDTH = 313;
+    private static int CARD_WIDTH = 157;
     private static int CARD_HEIGHT = 176;
 
     static class ViewHolder extends Presenter.ViewHolder {

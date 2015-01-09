@@ -93,7 +93,7 @@ public class MainFragment extends BrowseFragment {
     }
 
     private void loadRows() {
-        List<Movie> list = MovieList.setupMovies();
+        List<Movie> list = DummyDataList.setupMovies();
 
         mRowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         mCardPresenter = new CardPresenter();
@@ -107,7 +107,7 @@ public class MainFragment extends BrowseFragment {
             for (int j = 0; j < NUM_COLS; j++) {
                 listRowAdapter.add(list.get(j % 5));
             }
-            HeaderItem header = new HeaderItem(i, MovieList.MOVIE_CATEGORY[i], null);
+            HeaderItem header = new HeaderItem(i, DummyDataList.SUB_CATEGORY[i], null);
             mRowsAdapter.add(new ListRow(header, listRowAdapter));
         }
 

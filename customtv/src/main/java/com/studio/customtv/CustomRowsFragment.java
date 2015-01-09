@@ -1,18 +1,27 @@
 package com.studio.customtv;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v17.leanback.app.RowsFragment;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.HeaderItem;
+import android.support.v17.leanback.widget.ImageCardView;
 import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.ListRowPresenter;
+import android.support.v17.leanback.widget.OnItemViewClickedListener;
+import android.support.v17.leanback.widget.Presenter;
+import android.support.v17.leanback.widget.Row;
+import android.support.v17.leanback.widget.RowPresenter;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,6 +33,7 @@ public class CustomRowsFragment extends RowsFragment {
 
 	private ArrayObjectAdapter rowsAdapter;
 	private CardPresenter cardPresenter;
+    private TextView label;
 
 	// CustomHeadersFragment, scaled by 0.9 on a 1080p screen, is 600px wide.
 	// This is the corresponding dip size.
@@ -52,14 +62,14 @@ public class CustomRowsFragment extends RowsFragment {
         FrameLayout fm = (FrameLayout)v.getRootView();
         View viewChild = fm.getChildAt(0);
         ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) viewChild.getLayoutParams();
-        p.topMargin = Utils.dpToPx(65, getActivity());
+        p.topMargin = Utils.dpToPx(60, getActivity());
         viewChild.setLayoutParams(p);
 
-        TextView label = new TextView(getActivity());
+        label = new TextView(getActivity());
         label.setTextSize(TypedValue.COMPLEX_UNIT_SP,28);
-        label.setPadding(Utils.dpToPx(50, getActivity()), 0, 0, 0);
-        label.setText(MovieList.HEADER_CATEGORY[(int)getArguments().get(TAG_FRAGMENT_CATEGORY_ID)]);
-
+        label.setVisibility(View.INVISIBLE);
+        label.setPadding(Utils.dpToPx(52, getActivity()), 0, 0, 0);
+        label.setText(DummyDataList.HEADER_CATEGORY[(int)getArguments().get(TAG_FRAGMENT_CATEGORY_ID)]);
         fm.addView(label);
 		return v;
 	}
@@ -77,10 +87,10 @@ public class CustomRowsFragment extends RowsFragment {
 		rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
 		cardPresenter = new CardPresenter();
 
-		List<Movie> list = MovieList.setupMovies();
+		List<Movie> list = DummyDataList.setupMovies();
 
 		int i;
-		for (i = 0; i < MovieList.MOVIE_CATEGORY.length; i++) {
+		for (i = 0; i < DummyDataList.SUB_CATEGORY.length; i++) {
 			if (i != 0) {
 				Collections.shuffle(list);
 			}
@@ -88,7 +98,7 @@ public class CustomRowsFragment extends RowsFragment {
 			for (int j = 0; j < NUM_COLS; j++) {
 				listRowAdapter.add(list.get(j % 5));
 			}
-			HeaderItem header = new HeaderItem(i, MovieList.MOVIE_CATEGORY[i], null);
+			HeaderItem header = new HeaderItem(i, DummyDataList.SUB_CATEGORY[i], null);
 			rowsAdapter.add(new ListRow(header, listRowAdapter));
 		}
 
@@ -96,7 +106,7 @@ public class CustomRowsFragment extends RowsFragment {
 	}
 
 	private void setCustomPadding() {
-		getView().setPadding(Utils.dpToPx(-24, getActivity()), Utils.dpToPx(128, getActivity()), Utils.dpToPx(48, getActivity()), 0);
+		getView().setPadding(Utils.dpToPx(-24, getActivity()), Utils.dpToPx(100, getActivity()), Utils.dpToPx(48, getActivity()), 0);
 	}
 
 	private int getRandomColor() {
@@ -105,6 +115,18 @@ public class CustomRowsFragment extends RowsFragment {
 	}
 
 	public void refresh() {
-		getView().setPadding(Utils.dpToPx(-24, getActivity()), Utils.dpToPx(128, getActivity()), Utils.dpToPx(300, getActivity()), 0);
+		getView().setPadding(Utils.dpToPx(-24, getActivity()), Utils.dpToPx(100, getActivity()), Utils.dpToPx(300, getActivity()), 0);
 	}
+
+    public void showCategoryTitle(boolean show){
+        if(show)
+            label.setVisibility(View.VISIBLE);
+        else
+            label.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void setOnItemViewClickedListener(OnItemViewClickedListener listener) {
+        super.setOnItemViewClickedListener(listener);
+    }
 }

@@ -3,7 +3,7 @@ package com.studio.customtv;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class MovieList {
+public final class DummyDataList {
     public static final String HEADER_CATEGORY[] = {
             "Home",
             "Watchlist",
@@ -15,7 +15,7 @@ public final class MovieList {
             "Settings"
     };
 
-    public static final String MOVIE_CATEGORY[] = {
+    public static final String SUB_CATEGORY[] = {
             "Latest",
             "Recommended",
             "Genre",

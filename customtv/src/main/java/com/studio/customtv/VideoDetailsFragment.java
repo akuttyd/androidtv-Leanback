@@ -5,7 +5,6 @@ import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -147,7 +146,7 @@ public class VideoDetailsFragment extends DetailsFragment {
             String subcategories[] = {
                     getString(R.string.related_movies)
             };
-            List<Movie> list = MovieList.list;
+            List<Movie> list = DummyDataList.list;
             Collections.shuffle(list);
             ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new CardPresenter());
             for (int j = 0; j < NUM_COLS; j++) {
