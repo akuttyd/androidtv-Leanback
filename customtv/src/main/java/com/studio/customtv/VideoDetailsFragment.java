@@ -146,7 +146,7 @@ public class VideoDetailsFragment extends DetailsFragment {
             String subcategories[] = {
                     getString(R.string.related_movies)
             };
-            List<Movie> list = DummyDataList.list;
+            List<Movie> list = DummyDataList.subCategoryMap.entrySet().iterator().next().getValue();
             Collections.shuffle(list);
             ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new CardPresenter());
             for (int j = 0; j < NUM_COLS; j++) {

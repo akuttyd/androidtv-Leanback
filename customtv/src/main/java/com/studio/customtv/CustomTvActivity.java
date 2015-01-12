@@ -37,7 +37,6 @@ public class CustomTvActivity extends Activity {
 
     private CustomHeadersFragment headersFragment;
     private CustomRowsFragment rowsFragment;
-    private TitleView titleView;
 
     private LinkedHashMap<Integer, CustomRowsFragment> fragmentLinkedHashMap;
     private CustomFrameLayout customFrameLayout;

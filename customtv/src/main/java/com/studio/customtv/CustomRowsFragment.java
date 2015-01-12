@@ -7,12 +7,14 @@ import android.support.v17.leanback.app.RowsFragment;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ImageCardView;
+import android.support.v17.leanback.widget.ItemBridgeAdapter;
 import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.ListRowPresenter;
 import android.support.v17.leanback.widget.OnItemViewClickedListener;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
+import android.support.v17.leanback.widget.VerticalGridView;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.util.Log;
 import android.util.TypedValue;
@@ -24,7 +26,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class CustomRowsFragment extends RowsFragment {
@@ -87,21 +91,35 @@ public class CustomRowsFragment extends RowsFragment {
 		rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
 		cardPresenter = new CardPresenter();
 
-		List<Movie> list = DummyDataList.setupMovies();
+		Map<String, List<Movie>> map = DummyDataList.setupMovies();
 
-		int i;
-		for (i = 0; i < DummyDataList.SUB_CATEGORY.length; i++) {
-			if (i != 0) {
-				Collections.shuffle(list);
-			}
-			ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
-			for (int j = 0; j < NUM_COLS; j++) {
-				listRowAdapter.add(list.get(j % 5));
-			}
-			HeaderItem header = new HeaderItem(i, DummyDataList.SUB_CATEGORY[i], null);
-			rowsAdapter.add(new ListRow(header, listRowAdapter));
-		}
-
+//		int i;
+//		for (i = 0; i < DummyDataList.SUB_CATEGORY.length; i++) {
+//			if (i != 0) {
+//				Collections.shuffle(list);
+//			}
+//			ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
+//			for (int j = 0; j < NUM_COLS; j++) {
+//				listRowAdapter.add(list.get(j % 5));
+//			}
+//			HeaderItem header = new HeaderItem(i, DummyDataList.SUB_CATEGORY[i], null);
+//			rowsAdapter.add(new ListRow(header, listRowAdapter));
+//		}
+        int i = 0;
+        for (Map.Entry<String, List<Movie>> entry : map.entrySet()) {
+            String key = entry.getKey();
+            List<Movie> value = entry.getValue();
+            if (i != 0) {
+                Collections.shuffle(value);
+            }
+            ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
+            for (int j = 0; j < NUM_COLS; j++) {
+                listRowAdapter.add(value.get(j % 5));
+            }
+            HeaderItem header = new HeaderItem(i, key, null);
+            rowsAdapter.add(new ListRow(header, listRowAdapter));
+            i++;
+        }
 		setAdapter(rowsAdapter);
 	}
 
@@ -128,5 +146,10 @@ public class CustomRowsFragment extends RowsFragment {
     @Override
     public void setOnItemViewClickedListener(OnItemViewClickedListener listener) {
         super.setOnItemViewClickedListener(listener);
+    }
+
+    @Override
+    public void setExpand(boolean expand) {
+        super.setExpand(expand);
     }
 }

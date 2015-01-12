@@ -80,7 +80,7 @@ public class TVSearchFragment extends SearchFragment implements SearchFragment.S
 			// accordingly
 			mRowsAdapter.clear();
 			ArrayObjectAdapter adapter = new ArrayObjectAdapter(new CardPresenter());
-			adapter.addAll(0, DummyDataList.list);
+			adapter.addAll(0, DummyDataList.subCategoryMap.entrySet().iterator().next().getValue());
 			HeaderItem header = new HeaderItem(0, getResources().getString(R.string.search_results), null);
 			mRowsAdapter.add(new ListRow(header, adapter));
 		}

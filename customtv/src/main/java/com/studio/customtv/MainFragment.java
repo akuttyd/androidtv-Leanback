@@ -16,7 +16,9 @@ package com.studio.customtv;
 
 import java.net.URI;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -93,22 +95,39 @@ public class MainFragment extends BrowseFragment {
     }
 
     private void loadRows() {
-        List<Movie> list = DummyDataList.setupMovies();
+        Map<String, List<Movie>> map = DummyDataList.setupMovies();
 
         mRowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         mCardPresenter = new CardPresenter();
 
-        int i;
-        for (i = 0; i < NUM_ROWS; i++) {
+//        int i;
+//        for (i = 0; i < NUM_ROWS; i++) {
+//            if (i != 0) {
+//                Collections.shuffle(list);
+//            }
+//            ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(mCardPresenter);
+//            for (int j = 0; j < NUM_COLS; j++) {
+//                listRowAdapter.add(list.get(j % 5));
+//            }
+//            HeaderItem header = new HeaderItem(i, DummyDataList.SUB_CATEGORY[i], null);
+//            mRowsAdapter.add(new ListRow(header, listRowAdapter));
+//        }
+        int i = 0;
+        for (Map.Entry<String, List<Movie>> entry : map.entrySet()) {
+            String key = entry.getKey();
+            List<Movie> value = entry.getValue();
+            // ...
             if (i != 0) {
-                Collections.shuffle(list);
+                Collections.shuffle(value);
             }
+
             ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(mCardPresenter);
             for (int j = 0; j < NUM_COLS; j++) {
-                listRowAdapter.add(list.get(j % 5));
+                listRowAdapter.add(value.get(j % 5));
             }
-            HeaderItem header = new HeaderItem(i, DummyDataList.SUB_CATEGORY[i], null);
+            HeaderItem header = new HeaderItem(i, key, null);
             mRowsAdapter.add(new ListRow(header, listRowAdapter));
+            i++;
         }
 
         HeaderItem gridHeader = new HeaderItem(i, "PREFERENCES", null);
