@@ -122,19 +122,7 @@ public class VideoDetailsFragment extends DetailsFragment {
             // set detail background and style
             mDorPresenter.setBackgroundColor(getResources().getColor(R.color.detail_background));
             mDorPresenter.setStyleLarge(true);
-            mDorPresenter.setOnActionClickedListener(new OnActionClickedListener() {
-                @Override
-                public void onActionClicked(Action action) {
-                    if (action.getId() == ACTION_WATCH_TRAILER) {
-                        Intent intent = new Intent(getActivity(), PlaybackOverlayActivity.class);
-                        intent.putExtra(getResources().getString(R.string.movie), mSelectedMovie);
-                        intent.putExtra(getResources().getString(R.string.should_start), true);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(getActivity(), action.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            mDorPresenter.setOnActionClickedListener(new ActionClickedListener());
 
             ps.addClassPresenter(DetailsOverviewRow.class, mDorPresenter);
             ps.addClassPresenter(ListRow.class,
@@ -177,6 +165,21 @@ public class VideoDetailsFragment extends DetailsFragment {
                         ((ImageCardView) itemViewHolder.view).getMainImageView(),
                         DetailsActivity.SHARED_ELEMENT_NAME).toBundle();
                 getActivity().startActivity(intent, bundle);
+            }
+        }
+    }
+
+    private final class ActionClickedListener implements OnActionClickedListener{
+
+        @Override
+        public void onActionClicked(Action action) {
+            if (action.getId() == ACTION_WATCH_TRAILER) {
+                Intent intent = new Intent(getActivity(), PlaybackOverlayActivity.class);
+                intent.putExtra(getResources().getString(R.string.movie), mSelectedMovie);
+                intent.putExtra(getResources().getString(R.string.should_start), true);
+                startActivity(intent);
+            } else {
+                Toast.makeText(getActivity(), action.toString(), Toast.LENGTH_SHORT).show();
             }
         }
     }

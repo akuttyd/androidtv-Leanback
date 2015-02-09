@@ -19,6 +19,7 @@ public final class DummyDataList {
     };
 
     public static Map<String, List<Movie>> subCategoryMap;
+    public static Map<String, List<Movie>> subCategoryMap2;
 
     public static Map<String, List<Movie>> setupMovies() {
         subCategoryMap = new LinkedHashMap<String, List<Movie>>();
@@ -29,6 +30,14 @@ public final class DummyDataList {
         return subCategoryMap;
     }
 
+    public static Map<String, List<Movie>> setupMovies2() {
+        subCategoryMap2 = new LinkedHashMap<String, List<Movie>>();
+        subCategoryMap2.put("Latest",setupLatestList2());
+        subCategoryMap2.put("Recommended",setupLatestList2());
+        subCategoryMap2.put("Genre",setupGenreList());
+        subCategoryMap2.put("Collections",setupLatestList2());
+        return subCategoryMap2;
+    }
 
     public static List<Movie> setupLatestList(){
         List<Movie> list = new ArrayList<Movie>();
@@ -66,6 +75,60 @@ public final class DummyDataList {
                 "http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg&apikey=de579dd7",
                 "http://ia.media-imdb.com/images/M/MV5BODAzMDgxMDc1MF5BMl5BanBnXkFtZTgwMTI0OTAzMjE@._V1_SX300.jpg&apikey=de579dd7",
                 "http://ia.media-imdb.com/images/M/MV5BMTk0MDQ3MzAzOV5BMl5BanBnXkFtZTgwNzU1NzE3MjE@._V1_SX300.jpg&apikey=de579dd7",
+                "http://ia.media-imdb.com/images/M/MV5BMzM5NjUxOTEyMl5BMl5BanBnXkFtZTgwNjEyMDM0MDE@._V1_SX300.jpg&apikey=de579dd7",
+                "http://ia.media-imdb.com/images/M/MV5BMTAwMTU4MDA3NDNeQTJeQWpwZ15BbWU4MDk4NTMxNTIx._V1_SX300.jpg&apikey=de579dd7"
+        };
+
+        list.add(buildMovieInfo("category", title[0],
+                description[0], "Studio Zero", videoUrl[0], cardImageUrl[0], bgImageUrl[0]));
+        list.add(buildMovieInfo("category", title[1],
+                description[1], "Studio One", videoUrl[1], cardImageUrl[1], bgImageUrl[1]));
+        list.add(buildMovieInfo("category", title[2],
+                description[2], "", videoUrl[2], cardImageUrl[2], bgImageUrl[2]));
+        list.add(buildMovieInfo("category", title[3],
+                description[3], "Studio Three", videoUrl[3], cardImageUrl[3], bgImageUrl[3]));
+        list.add(buildMovieInfo("category", title[4],
+                description[4], "Studio Four", videoUrl[4], cardImageUrl[4], bgImageUrl[4]));
+
+        return list;
+    }
+
+    public static List<Movie> setupLatestList2(){
+        List<Movie> list = new ArrayList<Movie>();
+        String title[] = {
+                "The Theory of Everything",
+                "The Imitation Game",
+                "Hercules",
+                "The Grand Budapest Hotel",
+                "The Theory of Everything"
+        };
+
+        String description[] = {
+                "A look at the relationship between the famous physicist Stephen Hawking and his wife.",
+                "English mathematician and logician, Alan Turing, helps crack the Enigma code during World War II.",
+                "The son of the Greek Gods Zeus and Hera is stripped of his immortality as an infant and must become a true hero in order to reclaim it.",
+                "The adventures of Gustave H, a legendary concierge at a famous hotel from the fictional Republic of Zubrowka between the first and second World Wars, and Zero Moustafa, the lobby boy who becomes his most trusted friend.",
+                "A look at the relationship between the famous physicist Stephen Hawking and his wife."
+        };
+
+        String videoUrl[] = {
+                "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/Zeitgeist/Zeitgeist%202010_%20Year%20in%20Review.mp4",
+                "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/Demo%20Slam/Google%20Demo%20Slam_%2020ft%20Search.mp4",
+                "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/April%20Fool's%202013/Introducing%20Gmail%20Blue.mp4",
+                "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/April%20Fool's%202013/Introducing%20Google%20Fiber%20to%20the%20Pole.mp4",
+                "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/April%20Fool's%202013/Introducing%20Google%20Nose.mp4"
+        };
+        String bgImageUrl[] = {
+                "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/Zeitgeist/Zeitgeist%202010_%20Year%20in%20Review/bg.jpg",
+                "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/Demo%20Slam/Google%20Demo%20Slam_%2020ft%20Search/bg.jpg",
+                "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/April%20Fool's%202013/Introducing%20Gmail%20Blue/bg.jpg",
+                "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/April%20Fool's%202013/Introducing%20Google%20Fiber%20to%20the%20Pole/bg.jpg",
+                "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/April%20Fool's%202013/Introducing%20Google%20Nose/bg.jpg",
+        };
+        String cardImageUrl[] = {
+                "http://ia.media-imdb.com/images/M/MV5BMTAwMTU4MDA3NDNeQTJeQWpwZ15BbWU4MDk4NTMxNTIx._V1_SX300.jpg&apikey=de579dd7",
+                "http://ia.media-imdb.com/images/M/MV5BNDkwNTEyMzkzNl5BMl5BanBnXkFtZTgwNTAwNzk3MjE@._V1_SX300.jpg&apikey=de579dd7",
+                "http://ia.media-imdb.com/images/M/MV5BMTI5NTI3OTAyOV5BMl5BanBnXkFtZTcwMTg3ODkxMQ@@._V1_SX300.jpg&apikey=de579dd7",
                 "http://ia.media-imdb.com/images/M/MV5BMzM5NjUxOTEyMl5BMl5BanBnXkFtZTgwNjEyMDM0MDE@._V1_SX300.jpg&apikey=de579dd7",
                 "http://ia.media-imdb.com/images/M/MV5BMTAwMTU4MDA3NDNeQTJeQWpwZ15BbWU4MDk4NTMxNTIx._V1_SX300.jpg&apikey=de579dd7"
         };

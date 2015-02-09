@@ -38,6 +38,7 @@ public class CustomRowsFragment extends RowsFragment {
 	private ArrayObjectAdapter rowsAdapter;
 	private CardPresenter cardPresenter;
     private TextView label;
+    private int categoryID;
 
 	// CustomHeadersFragment, scaled by 0.9 on a 1080p screen, is 600px wide.
 	// This is the corresponding dip size.
@@ -55,7 +56,7 @@ public class CustomRowsFragment extends RowsFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = super.onCreateView(inflater, container, savedInstanceState);
-
+        categoryID = (int)getArguments().get(TAG_FRAGMENT_CATEGORY_ID);
 		int marginOffset = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, HEADERS_FRAGMENT_SCALE_SIZE, getResources().getDisplayMetrics());
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
 		params.rightMargin -= marginOffset;
@@ -73,7 +74,7 @@ public class CustomRowsFragment extends RowsFragment {
         label.setTextSize(TypedValue.COMPLEX_UNIT_SP,28);
         label.setVisibility(View.INVISIBLE);
         label.setPadding(Utils.dpToPx(52, getActivity()), 0, 0, 0);
-        label.setText(DummyDataList.HEADER_CATEGORY[(int)getArguments().get(TAG_FRAGMENT_CATEGORY_ID)]);
+        label.setText(DummyDataList.HEADER_CATEGORY[categoryID]);
         fm.addView(label);
 		return v;
 	}
@@ -90,21 +91,12 @@ public class CustomRowsFragment extends RowsFragment {
 	private void loadRows() {
 		rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
 		cardPresenter = new CardPresenter();
+        Map<String, List<Movie>> map;
+        if((categoryID%2)==0)
+            map = DummyDataList.setupMovies();
+        else
+            map = DummyDataList.setupMovies2();
 
-		Map<String, List<Movie>> map = DummyDataList.setupMovies();
-
-//		int i;
-//		for (i = 0; i < DummyDataList.SUB_CATEGORY.length; i++) {
-//			if (i != 0) {
-//				Collections.shuffle(list);
-//			}
-//			ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
-//			for (int j = 0; j < NUM_COLS; j++) {
-//				listRowAdapter.add(list.get(j % 5));
-//			}
-//			HeaderItem header = new HeaderItem(i, DummyDataList.SUB_CATEGORY[i], null);
-//			rowsAdapter.add(new ListRow(header, listRowAdapter));
-//		}
         int i = 0;
         for (Map.Entry<String, List<Movie>> entry : map.entrySet()) {
             String key = entry.getKey();

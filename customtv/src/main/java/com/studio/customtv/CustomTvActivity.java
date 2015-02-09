@@ -67,12 +67,13 @@ public class CustomTvActivity extends Activity {
 
         for (int i = 0; i < DummyDataList.HEADER_CATEGORY.length; i++) {
             CustomRowsFragment fragment = CustomRowsFragment.newInstance(i);
+            fragment.setOnItemViewClickedListener(new ItemViewClickedListener());
             fragmentLinkedHashMap.put(i, fragment);
         }
 
         headersFragment = new CustomHeadersFragment();
         rowsFragment = fragmentLinkedHashMap.get(0);
-        rowsFragment.setOnItemViewClickedListener(new ItemViewClickedListener());
+        //rowsFragment.setOnItemViewClickedListener(new ItemViewClickedListener());
 
         customFrameLayout = (CustomFrameLayout) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
         setupCustomFrameLayout();

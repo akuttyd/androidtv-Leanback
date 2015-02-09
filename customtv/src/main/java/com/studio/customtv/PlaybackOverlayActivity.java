@@ -15,11 +15,14 @@ package com.studio.customtv;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.VideoView;
+
+import java.net.URI;
 
 /**
  * PlaybackOverlayActivity for video playback that loads PlaybackOverlayFragment
@@ -47,7 +50,7 @@ public class PlaybackOverlayActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playback_controls);
         loadViews();
-        //setupCallbacks();
+        setupCallbacks();
         overScan();
     }
 
@@ -61,7 +64,7 @@ public class PlaybackOverlayActivity extends Activity implements
      * Implementation of OnPlayPauseClickedListener
      */
     public void onFragmentPlayPause(Movie movie, int position, Boolean playPause) {
-        mVideoView.setVideoPath(movie.getVideoUrl());
+        mVideoView.setVideoURI(Uri.parse(movie.getVideoUrl()));
 
         if (position == 0 || mPlaybackState == PlaybackState.IDLE) {
             setupCallbacks();
